@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>بث مباشر</title>
+  <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background: #000;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    video {
+      width: 90%;
+      max-width: 960px;
+      border: 2px solid white;
+    }
+  </style>
+</head>
+<body>
+  <video id="video" controls autoplay muted></video>
+  <script>
+    var video = document.getElementById('video');
+    var url = 'http://bazoka.co:80/live/699351674520/2011699351674520/135809.m3u8';
+    if (Hls.isSupported()) {
+      var hls = new Hls();
+      hls.loadSource(url);
+      hls.attachMedia(video);
+    } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+      video.src = url;
+    } else {
+      alert("المتصفح لا يدعم تشغيل HLS");
+    }
+  </script>
+</body>
+</html>
